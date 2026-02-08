@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Intellectual Diary",
+  title: "Mindmap",
   description: "Track and reflect on everything you read, listen to, and write",
 };
 
@@ -30,7 +30,7 @@ export default function RootLayout({
       >
         <Sidebar />
         <main className="md:ml-64 min-h-screen">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pt-16 md:pt-8">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pt-16 md:pt-10">
             {children}
           </div>
         </main>

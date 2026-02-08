@@ -31,16 +31,16 @@ export default async function EntriesPage({ searchParams }: PageProps) {
     <div>
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900">All Entries</h1>
-          <p className="text-sm text-slate-500 mt-1">
+          <h1 className="text-2xl font-bold text-[#1a1714]">All entries</h1>
+          <p className="text-sm text-[#9a9187] mt-1">
             {total} {total === 1 ? "entry" : "entries"} total
           </p>
         </div>
         <Link
           href="/entries/new"
-          className="px-4 py-2 bg-indigo-600 text-white text-sm rounded-lg hover:bg-indigo-700 transition-colors font-medium"
+          className="px-4 py-2 bg-[#c47a2b] text-white text-sm rounded-lg hover:bg-[#9a5f1e] transition-colors font-medium"
         >
-          + Add Entry
+          + New entry
         </Link>
       </div>
 

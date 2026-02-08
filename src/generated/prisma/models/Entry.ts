@@ -213,7 +213,7 @@ export type EntryGroupByOutputType = {
   id: string
   title: string
   type: $Enums.EntryType
-  dateConsumed: Date
+  dateConsumed: Date | null
   source: string | null
   author: string | null
   content: string | null
@@ -249,7 +249,7 @@ export type EntryWhereInput = {
   id?: Prisma.StringFilter<"Entry"> | string
   title?: Prisma.StringFilter<"Entry"> | string
   type?: Prisma.EnumEntryTypeFilter<"Entry"> | $Enums.EntryType
-  dateConsumed?: Prisma.DateTimeFilter<"Entry"> | Date | string
+  dateConsumed?: Prisma.DateTimeNullableFilter<"Entry"> | Date | string | null
   source?: Prisma.StringNullableFilter<"Entry"> | string | null
   author?: Prisma.StringNullableFilter<"Entry"> | string | null
   content?: Prisma.StringNullableFilter<"Entry"> | string | null
@@ -264,7 +264,7 @@ export type EntryOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   type?: Prisma.SortOrder
-  dateConsumed?: Prisma.SortOrder
+  dateConsumed?: Prisma.SortOrderInput | Prisma.SortOrder
   source?: Prisma.SortOrderInput | Prisma.SortOrder
   author?: Prisma.SortOrderInput | Prisma.SortOrder
   content?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -283,7 +283,7 @@ export type EntryWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.EntryWhereInput | Prisma.EntryWhereInput[]
   title?: Prisma.StringFilter<"Entry"> | string
   type?: Prisma.EnumEntryTypeFilter<"Entry"> | $Enums.EntryType
-  dateConsumed?: Prisma.DateTimeFilter<"Entry"> | Date | string
+  dateConsumed?: Prisma.DateTimeNullableFilter<"Entry"> | Date | string | null
   source?: Prisma.StringNullableFilter<"Entry"> | string | null
   author?: Prisma.StringNullableFilter<"Entry"> | string | null
   content?: Prisma.StringNullableFilter<"Entry"> | string | null
@@ -298,7 +298,7 @@ export type EntryOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   type?: Prisma.SortOrder
-  dateConsumed?: Prisma.SortOrder
+  dateConsumed?: Prisma.SortOrderInput | Prisma.SortOrder
   source?: Prisma.SortOrderInput | Prisma.SortOrder
   author?: Prisma.SortOrderInput | Prisma.SortOrder
   content?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -319,7 +319,7 @@ export type EntryScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"Entry"> | string
   title?: Prisma.StringWithAggregatesFilter<"Entry"> | string
   type?: Prisma.EnumEntryTypeWithAggregatesFilter<"Entry"> | $Enums.EntryType
-  dateConsumed?: Prisma.DateTimeWithAggregatesFilter<"Entry"> | Date | string
+  dateConsumed?: Prisma.DateTimeNullableWithAggregatesFilter<"Entry"> | Date | string | null
   source?: Prisma.StringNullableWithAggregatesFilter<"Entry"> | string | null
   author?: Prisma.StringNullableWithAggregatesFilter<"Entry"> | string | null
   content?: Prisma.StringNullableWithAggregatesFilter<"Entry"> | string | null
@@ -332,7 +332,7 @@ export type EntryCreateInput = {
   id?: string
   title: string
   type: $Enums.EntryType
-  dateConsumed: Date | string
+  dateConsumed?: Date | string | null
   source?: string | null
   author?: string | null
   content?: string | null
@@ -347,7 +347,7 @@ export type EntryUncheckedCreateInput = {
   id?: string
   title: string
   type: $Enums.EntryType
-  dateConsumed: Date | string
+  dateConsumed?: Date | string | null
   source?: string | null
   author?: string | null
   content?: string | null
@@ -362,7 +362,7 @@ export type EntryUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumEntryTypeFieldUpdateOperationsInput | $Enums.EntryType
-  dateConsumed?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dateConsumed?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   author?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -377,7 +377,7 @@ export type EntryUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumEntryTypeFieldUpdateOperationsInput | $Enums.EntryType
-  dateConsumed?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dateConsumed?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   author?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -392,7 +392,7 @@ export type EntryCreateManyInput = {
   id?: string
   title: string
   type: $Enums.EntryType
-  dateConsumed: Date | string
+  dateConsumed?: Date | string | null
   source?: string | null
   author?: string | null
   content?: string | null
@@ -405,7 +405,7 @@ export type EntryUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumEntryTypeFieldUpdateOperationsInput | $Enums.EntryType
-  dateConsumed?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dateConsumed?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   author?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -418,7 +418,7 @@ export type EntryUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumEntryTypeFieldUpdateOperationsInput | $Enums.EntryType
-  dateConsumed?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dateConsumed?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   author?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -503,8 +503,8 @@ export type EnumEntryTypeFieldUpdateOperationsInput = {
   set?: $Enums.EntryType
 }
 
-export type DateTimeFieldUpdateOperationsInput = {
-  set?: Date | string
+export type NullableDateTimeFieldUpdateOperationsInput = {
+  set?: Date | string | null
 }
 
 export type NullableStringFieldUpdateOperationsInput = {
@@ -517,6 +517,10 @@ export type IntFieldUpdateOperationsInput = {
   decrement?: number
   multiply?: number
   divide?: number
+}
+
+export type DateTimeFieldUpdateOperationsInput = {
+  set?: Date | string
 }
 
 export type EntryCreateNestedOneWithoutReflectionsInput = {
@@ -575,7 +579,7 @@ export type EntryCreateWithoutReflectionsInput = {
   id?: string
   title: string
   type: $Enums.EntryType
-  dateConsumed: Date | string
+  dateConsumed?: Date | string | null
   source?: string | null
   author?: string | null
   content?: string | null
@@ -589,7 +593,7 @@ export type EntryUncheckedCreateWithoutReflectionsInput = {
   id?: string
   title: string
   type: $Enums.EntryType
-  dateConsumed: Date | string
+  dateConsumed?: Date | string | null
   source?: string | null
   author?: string | null
   content?: string | null
@@ -619,7 +623,7 @@ export type EntryUpdateWithoutReflectionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumEntryTypeFieldUpdateOperationsInput | $Enums.EntryType
-  dateConsumed?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dateConsumed?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   author?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -633,7 +637,7 @@ export type EntryUncheckedUpdateWithoutReflectionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumEntryTypeFieldUpdateOperationsInput | $Enums.EntryType
-  dateConsumed?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dateConsumed?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   author?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -647,7 +651,7 @@ export type EntryCreateWithoutTagsInput = {
   id?: string
   title: string
   type: $Enums.EntryType
-  dateConsumed: Date | string
+  dateConsumed?: Date | string | null
   source?: string | null
   author?: string | null
   content?: string | null
@@ -661,7 +665,7 @@ export type EntryUncheckedCreateWithoutTagsInput = {
   id?: string
   title: string
   type: $Enums.EntryType
-  dateConsumed: Date | string
+  dateConsumed?: Date | string | null
   source?: string | null
   author?: string | null
   content?: string | null
@@ -699,7 +703,7 @@ export type EntryScalarWhereInput = {
   id?: Prisma.StringFilter<"Entry"> | string
   title?: Prisma.StringFilter<"Entry"> | string
   type?: Prisma.EnumEntryTypeFilter<"Entry"> | $Enums.EntryType
-  dateConsumed?: Prisma.DateTimeFilter<"Entry"> | Date | string
+  dateConsumed?: Prisma.DateTimeNullableFilter<"Entry"> | Date | string | null
   source?: Prisma.StringNullableFilter<"Entry"> | string | null
   author?: Prisma.StringNullableFilter<"Entry"> | string | null
   content?: Prisma.StringNullableFilter<"Entry"> | string | null
@@ -712,7 +716,7 @@ export type EntryUpdateWithoutTagsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumEntryTypeFieldUpdateOperationsInput | $Enums.EntryType
-  dateConsumed?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dateConsumed?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   author?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -726,7 +730,7 @@ export type EntryUncheckedUpdateWithoutTagsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumEntryTypeFieldUpdateOperationsInput | $Enums.EntryType
-  dateConsumed?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dateConsumed?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   author?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -740,7 +744,7 @@ export type EntryUncheckedUpdateManyWithoutTagsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumEntryTypeFieldUpdateOperationsInput | $Enums.EntryType
-  dateConsumed?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dateConsumed?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   author?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -863,7 +867,7 @@ export type $EntryPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     id: string
     title: string
     type: $Enums.EntryType
-    dateConsumed: Date
+    dateConsumed: Date | null
     source: string | null
     author: string | null
     content: string | null

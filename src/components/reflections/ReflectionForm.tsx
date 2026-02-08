@@ -37,15 +37,15 @@ export default function ReflectionForm({ entryId }: { entryId: string }) {
         value={content}
         onChange={(e) => setContent(e.target.value)}
         rows={3}
-        className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none resize-y text-sm"
+        className="w-full px-3 py-2 border border-[#e8e0d6] rounded-lg focus:ring-2 focus:ring-[#c47a2b]/30 focus:border-[#c47a2b] outline-none resize-y text-sm text-[#1a1714] placeholder-[#c4bbb0]"
         placeholder="Add a reflection... What are you thinking about now?"
       />
       <button
         type="submit"
         disabled={isSubmitting || !content.trim()}
-        className="mt-2 px-4 py-2 bg-indigo-600 text-white text-sm rounded-lg hover:bg-indigo-700 transition-colors disabled:opacity-50"
+        className="mt-2 px-4 py-2 bg-[#c47a2b] text-white text-sm rounded-lg hover:bg-[#9a5f1e] transition-colors disabled:opacity-50"
       >
-        {isSubmitting ? "Adding..." : "Add Reflection"}
+        {isSubmitting ? "Adding..." : "Add reflection"}
       </button>
     </form>
   );

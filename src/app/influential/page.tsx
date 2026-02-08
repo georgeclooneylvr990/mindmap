@@ -10,11 +10,11 @@ export default async function InfluentialPage() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-slate-900 mb-1">
-        Most Influential
+      <h1 className="text-2xl font-bold text-[#1a1714] mb-1">
+        Most influential
       </h1>
-      <p className="text-slate-500 text-sm mb-6">
-        Everything rated 4 or 5 stars — the media that most shaped your thinking.
+      <p className="text-[#9a9187] text-sm mb-6">
+        Everything rated 4 or 5 — the ideas that most shaped your thinking.
       </p>
       <EntryList entries={entries} />
     </div>

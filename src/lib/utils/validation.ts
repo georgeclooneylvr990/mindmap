@@ -3,7 +3,7 @@ import { z } from "zod";
 export const entrySchema = z.object({
   title: z.string().min(1, "Title is required").max(500),
   type: z.enum(["PODCAST", "BOOK", "PERSONAL_WRITING", "ARTICLE"]),
-  dateConsumed: z.coerce.date(),
+  dateConsumed: z.coerce.date().optional().nullable(),
   source: z.string().max(500).optional().or(z.literal("")),
   author: z.string().max(500).optional().or(z.literal("")),
   content: z.string().optional().or(z.literal("")),

@@ -40,6 +40,7 @@ export async function POST(request: NextRequest) {
 
     const entry = await createEntry({
       ...validated,
+      dateConsumed: validated.dateConsumed || null,
       source: validated.source || undefined,
       author: validated.author || undefined,
       content: validated.content || undefined,

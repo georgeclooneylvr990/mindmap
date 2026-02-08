@@ -9,36 +9,41 @@ interface StarRatingProps {
   size?: "sm" | "md" | "lg";
 }
 
+const sizeMap = {
+  sm: { dot: "w-2.5 h-2.5", gap: "gap-1" },
+  md: { dot: "w-3.5 h-3.5", gap: "gap-1.5" },
+  lg: { dot: "w-4.5 h-4.5", gap: "gap-2" },
+};
+
 export default function StarRating({
   value,
   onChange,
   readonly = false,
   size = "md",
 }: StarRatingProps) {
-  const sizeClasses = {
-    sm: "text-lg",
-    md: "text-2xl",
-    lg: "text-3xl",
-  };
+  const s = sizeMap[size];
 
   return (
-    <div className="flex items-center gap-1">
+    <div className={`flex items-center ${s.gap}`}>
       {[1, 2, 3, 4, 5].map((star) => (
         <button
           key={star}
           type="button"
           onClick={() => !readonly && onChange?.(star)}
           disabled={readonly}
-          className={`${sizeClasses[size]} transition-transform ${
-            readonly ? "cursor-default" : "cursor-pointer hover:scale-110"
-          } ${star <= value ? "grayscale-0" : "grayscale opacity-30"}`}
+          className={`rounded-full transition-all ${s.dot} ${
+            readonly ? "cursor-default" : "cursor-pointer hover:scale-125"
+          } ${
+            star <= value
+              ? "bg-[#c47a2b] shadow-sm shadow-[#c47a2b]/30"
+              : "bg-[#e8e0d6]"
+          }`}
           title={INFLUENCE_LABELS[star]}
-        >
-          ⭐
-        </button>
+          aria-label={`${star} of 5 - ${INFLUENCE_LABELS[star]}`}
+        />
       ))}
       {!readonly && value > 0 && (
-        <span className="ml-2 text-sm text-slate-500">
+        <span className="ml-2 text-sm text-[#9a9187]">
           {INFLUENCE_LABELS[value]}
         </span>
       )}

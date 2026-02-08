@@ -5,13 +5,13 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 const navItems = [
-  { href: "/", label: "Home", icon: "🏠" },
-  { href: "/entries", label: "All Entries", icon: "📋" },
-  { href: "/entries/new", label: "Add Entry", icon: "➕" },
-  { href: "/influential", label: "Most Influential", icon: "⭐" },
-  { href: "/summaries", label: "Monthly Summaries", icon: "📊" },
-  { href: "/themes", label: "Theme Map", icon: "🗺️" },
-  { href: "/search", label: "Search", icon: "🔍" },
+  { href: "/", label: "Home", icon: "\u25C7" },
+  { href: "/entries", label: "All entries", icon: "\u2261" },
+  { href: "/entries/new", label: "New entry", icon: "+" },
+  { href: "/influential", label: "Most influential", icon: "\u2605" },
+  { href: "/summaries", label: "Summaries", icon: "\u25A1" },
+  { href: "/themes", label: "Themes", icon: "\u25CE" },
+  { href: "/search", label: "Search", icon: "\u2315" },
 ];
 
 export default function Sidebar() {
@@ -20,34 +20,35 @@ export default function Sidebar() {
 
   return (
     <>
-      {/* Mobile toggle button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed top-4 left-4 z-50 md:hidden bg-slate-900 text-white p-2 rounded-lg shadow-lg"
+        className="fixed top-4 left-4 z-50 md:hidden bg-[#1a1714] text-[#a89f94] p-2.5 rounded-lg shadow-lg"
         aria-label="Toggle navigation"
       >
-        {isOpen ? "✕" : "☰"}
+        <span className="text-lg font-light">{isOpen ? "\u00D7" : "\u2630"}</span>
       </button>
 
-      {/* Overlay for mobile */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black/50 z-30 md:hidden"
+          className="fixed inset-0 bg-black/40 backdrop-blur-sm z-30 md:hidden"
           onClick={() => setIsOpen(false)}
         />
       )}
 
-      {/* Sidebar */}
       <aside
-        className={`fixed top-0 left-0 h-full w-64 bg-slate-900 text-slate-400 z-40 transition-transform duration-200
+        className={`fixed top-0 left-0 h-full w-64 bg-[#1a1714] z-40 transition-transform duration-200
           ${isOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0`}
       >
-        <div className="p-6 border-b border-slate-800">
-          <h1 className="text-white text-lg font-semibold">Intellectual Diary</h1>
-          <p className="text-slate-500 text-sm mt-1">Your mind, mapped</p>
+        <div className="p-6 border-b border-[#2d2822]">
+          <h1 className="text-[#f5e6d0] text-lg font-semibold tracking-tight">
+            Mindmap
+          </h1>
+          <p className="text-[#6b6157] text-xs mt-1 tracking-wide uppercase">
+            Your intellectual diary
+          </p>
         </div>
 
-        <nav className="mt-4 px-3">
+        <nav className="mt-6 px-4">
           {navItems.map((item) => {
             const isActive =
               item.href === "/"
@@ -59,19 +60,25 @@ export default function Sidebar() {
                 key={item.href}
                 href={item.href}
                 onClick={() => setIsOpen(false)}
-                className={`flex items-center gap-3 px-3 py-2.5 rounded-lg mb-1 transition-colors text-sm
+                className={`flex items-center gap-3 px-3 py-2.5 rounded-lg mb-0.5 transition-all text-sm
                   ${
                     isActive
-                      ? "bg-indigo-600/20 text-white font-medium"
-                      : "hover:bg-slate-800 hover:text-slate-200"
+                      ? "bg-[#c47a2b]/15 text-[#f5e6d0] font-medium"
+                      : "text-[#a89f94] hover:bg-[#2d2822] hover:text-[#d4cbc0]"
                   }`}
               >
-                <span className="text-base">{item.icon}</span>
+                <span className="w-5 text-center text-base opacity-70">{item.icon}</span>
                 {item.label}
               </Link>
             );
           })}
         </nav>
+
+        <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-[#2d2822]">
+          <p className="text-[#6b6157] text-xs text-center">
+            Track what shapes your thinking
+          </p>
+        </div>
       </aside>
     </>
   );

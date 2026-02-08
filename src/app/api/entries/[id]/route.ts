@@ -32,6 +32,7 @@ export async function PUT(
 
     const entry = await updateEntry(id, {
       ...validated,
+      dateConsumed: validated.dateConsumed || null,
       source: validated.source || undefined,
       author: validated.author || undefined,
       content: validated.content || undefined,

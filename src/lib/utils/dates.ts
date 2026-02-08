@@ -36,12 +36,17 @@ export interface GroupedByMonth<T> {
   items: T[];
 }
 
-export function groupByMonth<T extends { dateConsumed: Date | string }>(
+export function groupByMonth<T extends { dateConsumed: Date | string | null }>(
   items: T[]
 ): GroupedByMonth<T>[] {
   const groups = new Map<string, T[]>();
+  const inProgress: T[] = [];
 
   for (const item of items) {
+    if (!item.dateConsumed) {
+      inProgress.push(item);
+      continue;
+    }
     const key = getMonthKey(item.dateConsumed);
     if (!groups.has(key)) {
       groups.set(key, []);
@@ -49,11 +54,25 @@ export function groupByMonth<T extends { dateConsumed: Date | string }>(
     groups.get(key)!.push(item);
   }
 
-  return Array.from(groups.entries())
-    .sort(([a], [b]) => b.localeCompare(a))
-    .map(([key, items]) => ({
-      monthKey: key,
-      monthLabel: formatMonthYear(items[0].dateConsumed),
-      items,
-    }));
+  const result: GroupedByMonth<T>[] = [];
+
+  if (inProgress.length > 0) {
+    result.push({
+      monthKey: "in-progress",
+      monthLabel: "In progress",
+      items: inProgress,
+    });
+  }
+
+  result.push(
+    ...Array.from(groups.entries())
+      .sort(([a], [b]) => b.localeCompare(a))
+      .map(([key, items]) => ({
+        monthKey: key,
+        monthLabel: formatMonthYear(items[0].dateConsumed!),
+        items,
+      }))
+  );
+
+  return result;
 }

@@ -83,7 +83,7 @@ export async function getEntryById(id: string) {
 export async function createEntry(data: {
   title: string;
   type: EntryType;
-  dateConsumed: Date;
+  dateConsumed?: Date | null;
   source?: string;
   author?: string;
   content?: string;
@@ -95,6 +95,7 @@ export async function createEntry(data: {
   return prisma.entry.create({
     data: {
       ...rest,
+      dateConsumed: rest.dateConsumed || null,
       source: source || null,
       author: author || null,
       content: content || null,
@@ -116,7 +117,7 @@ export async function updateEntry(
   data: {
     title: string;
     type: EntryType;
-    dateConsumed: Date;
+    dateConsumed?: Date | null;
     source?: string;
     author?: string;
     content?: string;
@@ -131,6 +132,7 @@ export async function updateEntry(
     where: { id },
     data: {
       ...rest,
+      dateConsumed: rest.dateConsumed || null,
       source: source || null,
       author: author || null,
       content: content || null,
