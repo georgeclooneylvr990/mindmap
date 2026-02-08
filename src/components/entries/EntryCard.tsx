@@ -11,28 +11,44 @@ export default function EntryCard({ entry }: { entry: EntryWithTags }) {
 
   return (
     <Link href={`/entries/${entry.id}`} className="block group">
-      <div className="bg-white rounded-xl border border-slate-200 p-4 shadow-sm hover:shadow-md hover:border-indigo-200 transition-all">
+      <div className="bg-white rounded-xl border border-[#e8e0d6] p-4 shadow-sm hover:shadow-md hover:border-[#c47a2b]/30 transition-all">
         <div className="flex items-start justify-between gap-3">
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 mb-1">
               <Badge variant={entry.type.toLowerCase() as "podcast" | "book" | "article" | "personal_writing"}>
                 {typeInfo.icon} {typeInfo.label}
               </Badge>
-              <span className="text-xs text-slate-400">
-                {formatDate(entry.dateConsumed)}
-              </span>
+              {entry.dateConsumed ? (
+                <span className="text-xs text-[#9a9187]">
+                  {formatDate(entry.dateConsumed)}
+                </span>
+              ) : (
+                <span className="text-xs text-[#c47a2b] font-medium">
+                  In progress
+                </span>
+              )}
             </div>
 
-            <h3 className="font-semibold text-slate-900 group-hover:text-indigo-600 transition-colors truncate">
-              {entry.title}
-            </h3>
+            <div className="flex items-center gap-1.5">
+              <h3 className="font-semibold text-[#1a1714] group-hover:text-[#c47a2b] transition-colors truncate">
+                {entry.title}
+              </h3>
+              {entry.source && entry.source.startsWith("http") && (
+                <span
+                  className="text-[#9a9187] flex-shrink-0"
+                  title="Has source link"
+                >
+                  <span className="text-xs">↗</span>
+                </span>
+              )}
+            </div>
 
             {entry.author && (
-              <p className="text-sm text-slate-500 mt-0.5">by {entry.author}</p>
+              <p className="text-sm text-[#9a9187] mt-0.5">by {entry.author}</p>
             )}
 
             {entry.content && (
-              <p className="text-sm text-slate-600 mt-2 line-clamp-2">
+              <p className="text-sm text-[#6b6157] mt-2 line-clamp-2">
                 {entry.content}
               </p>
             )}
@@ -43,7 +59,7 @@ export default function EntryCard({ entry }: { entry: EntryWithTags }) {
                   <Badge key={tag.id}>{tag.name}</Badge>
                 ))}
                 {entry.tags.length > 4 && (
-                  <span className="text-xs text-slate-400 self-center">
+                  <span className="text-xs text-[#9a9187] self-center">
                     +{entry.tags.length - 4} more
                   </span>
                 )}

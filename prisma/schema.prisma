@@ -19,7 +19,7 @@ model Entry {
   id              String       @id @default(cuid())
   title           String
   type            EntryType
-  dateConsumed    DateTime
+  dateConsumed    DateTime?
   source          String?
   author          String?
   content         String?      @db.Text

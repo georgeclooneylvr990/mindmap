@@ -15,13 +15,13 @@ function getMonthLabel(monthStr: string) {
 }
 
 function getIntensityClass(count: number, maxCount: number): string {
-  if (count === 0) return "bg-slate-100";
+  if (count === 0) return "bg-[#f5efe8]";
   const ratio = count / maxCount;
-  if (ratio <= 0.2) return "bg-indigo-100";
-  if (ratio <= 0.4) return "bg-indigo-200";
-  if (ratio <= 0.6) return "bg-indigo-300";
-  if (ratio <= 0.8) return "bg-indigo-400 text-white";
-  return "bg-indigo-600 text-white";
+  if (ratio <= 0.2) return "bg-[#fdf0e0]";
+  if (ratio <= 0.4) return "bg-[#fde4c4]";
+  if (ratio <= 0.6) return "bg-[#e8a65a]";
+  if (ratio <= 0.8) return "bg-[#c47a2b] text-white";
+  return "bg-[#9a5f1e] text-white";
 }
 
 export default function ThemesPage() {
@@ -40,15 +40,15 @@ export default function ThemesPage() {
 
   if (isLoading) {
     return (
-      <div className="text-center py-12 text-slate-500">Loading themes...</div>
+      <div className="text-center py-12 text-[#9a9187]">Loading themes...</div>
     );
   }
 
   if (!data || data.tags.length === 0) {
     return (
       <div>
-        <h1 className="text-2xl font-bold text-slate-900 mb-1">Theme Map</h1>
-        <p className="text-slate-400 text-center py-12">
+        <h1 className="text-2xl font-bold text-[#1a1714] mb-1">Themes</h1>
+        <p className="text-[#c4bbb0] text-center py-12">
           No theme data yet. Add entries with tags to see your intellectual themes mapped out!
         </p>
       </div>
@@ -57,15 +57,14 @@ export default function ThemesPage() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-slate-900 mb-1">Theme Map</h1>
-      <p className="text-slate-500 text-sm mb-6">
+      <h1 className="text-2xl font-bold text-[#1a1714] mb-1">Themes</h1>
+      <p className="text-[#9a9187] text-sm mb-6">
         How your intellectual themes evolve over time.
       </p>
 
-      {/* Tag Cloud */}
-      <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-5 mb-6">
-        <h2 className="text-sm font-medium text-slate-500 mb-3">
-          Tag Cloud
+      <div className="bg-white rounded-xl border border-[#e8e0d6] shadow-sm p-5 mb-6">
+        <h2 className="text-sm font-medium text-[#9a9187] mb-3">
+          Tag cloud
         </h2>
         <div className="flex flex-wrap gap-2 justify-center">
           {data.tags.map((tag) => {
@@ -80,13 +79,13 @@ export default function ThemesPage() {
               )
             );
             const ratio = maxTotal > 0 ? totalCount / maxTotal : 0;
-            const fontSize = 0.75 + ratio * 1.5; // 0.75rem to 2.25rem
+            const fontSize = 0.75 + ratio * 1.5;
 
             return (
               <Link
                 key={tag}
                 href={`/entries?tag=${tag}`}
-                className="text-indigo-600 hover:text-indigo-800 transition-colors"
+                className="text-[#c47a2b] hover:text-[#9a5f1e] transition-colors"
                 style={{ fontSize: `${fontSize}rem` }}
               >
                 {tag}
@@ -96,22 +95,21 @@ export default function ThemesPage() {
         </div>
       </div>
 
-      {/* Heatmap */}
-      <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-5">
-        <h2 className="text-sm font-medium text-slate-500 mb-4">
-          Theme Heatmap
+      <div className="bg-white rounded-xl border border-[#e8e0d6] shadow-sm p-5">
+        <h2 className="text-sm font-medium text-[#9a9187] mb-4">
+          Theme heatmap
         </h2>
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
               <tr>
-                <th className="text-left text-xs text-slate-500 font-medium pb-2 pr-4 sticky left-0 bg-white">
+                <th className="text-left text-xs text-[#9a9187] font-medium pb-2 pr-4 sticky left-0 bg-white">
                   Theme
                 </th>
                 {data.months.map((month) => (
                   <th
                     key={month}
-                    className="text-center text-xs text-slate-500 font-medium pb-2 px-1 min-w-[48px]"
+                    className="text-center text-xs text-[#9a9187] font-medium pb-2 px-1 min-w-[48px]"
                   >
                     {getMonthLabel(month)}
                   </th>
@@ -121,10 +119,10 @@ export default function ThemesPage() {
             <tbody>
               {data.tags.map((tag) => (
                 <tr key={tag}>
-                  <td className="text-sm text-slate-700 py-1 pr-4 sticky left-0 bg-white font-medium">
+                  <td className="text-sm text-[#2d2822] py-1 pr-4 sticky left-0 bg-white font-medium">
                     <Link
                       href={`/entries?tag=${tag}`}
-                      className="hover:text-indigo-600 transition-colors"
+                      className="hover:text-[#c47a2b] transition-colors"
                     >
                       {tag}
                     </Link>
@@ -156,14 +154,13 @@ export default function ThemesPage() {
           </table>
         </div>
 
-        {/* Legend */}
-        <div className="flex items-center gap-2 mt-4 text-xs text-slate-500">
+        <div className="flex items-center gap-2 mt-4 text-xs text-[#9a9187]">
           <span>Less</span>
-          <div className="w-4 h-4 rounded bg-slate-100" />
-          <div className="w-4 h-4 rounded bg-indigo-100" />
-          <div className="w-4 h-4 rounded bg-indigo-200" />
-          <div className="w-4 h-4 rounded bg-indigo-400" />
-          <div className="w-4 h-4 rounded bg-indigo-600" />
+          <div className="w-4 h-4 rounded bg-[#f5efe8]" />
+          <div className="w-4 h-4 rounded bg-[#fdf0e0]" />
+          <div className="w-4 h-4 rounded bg-[#fde4c4]" />
+          <div className="w-4 h-4 rounded bg-[#c47a2b]" />
+          <div className="w-4 h-4 rounded bg-[#9a5f1e]" />
           <span>More</span>
         </div>
       </div>

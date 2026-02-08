@@ -46,8 +46,8 @@ export default function GenerateSummaryButton({
       disabled={isGenerating}
       className={`px-3 py-1.5 text-sm rounded-lg transition-colors disabled:opacity-50 ${
         hasExisting
-          ? "bg-slate-100 text-slate-600 hover:bg-slate-200"
-          : "bg-indigo-100 text-indigo-700 hover:bg-indigo-200"
+          ? "bg-[#f5efe8] text-[#6b6157] hover:bg-[#e8e0d6]"
+          : "bg-[#fdf0e0] text-[#9a5f1e] hover:bg-[#fde4c4]"
       }`}
     >
       {isGenerating

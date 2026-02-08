@@ -8,7 +8,7 @@ export default function ReflectionList({
 }) {
   if (reflections.length === 0) {
     return (
-      <p className="text-slate-400 text-sm italic">
+      <p className="text-[#c4bbb0] text-sm italic">
         No reflections yet. Add one below!
       </p>
     );
@@ -19,12 +19,12 @@ export default function ReflectionList({
       {reflections.map((reflection) => (
         <div
           key={reflection.id}
-          className="border-l-2 border-indigo-200 pl-4 py-1"
+          className="border-l-2 border-[#c47a2b]/30 pl-4 py-1"
         >
-          <p className="text-slate-700 text-sm whitespace-pre-wrap">
+          <p className="text-[#2d2822] text-sm whitespace-pre-wrap">
             {reflection.content}
           </p>
-          <p className="text-xs text-slate-400 mt-1">
+          <p className="text-xs text-[#9a9187] mt-1">
             {formatRelativeTime(reflection.createdAt)}
           </p>
         </div>

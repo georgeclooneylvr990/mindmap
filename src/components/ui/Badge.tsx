@@ -5,11 +5,11 @@ interface BadgeProps {
 }
 
 const variantClasses = {
-  default: "bg-slate-100 text-slate-700",
-  podcast: "bg-amber-100 text-amber-800",
-  book: "bg-emerald-100 text-emerald-800",
-  article: "bg-blue-100 text-blue-800",
-  personal_writing: "bg-purple-100 text-purple-800",
+  default: "bg-[#f5efe8] text-[#6b6157] border border-[#e8e0d6]",
+  podcast: "bg-amber-50 text-amber-800 border border-amber-200",
+  book: "bg-emerald-50 text-emerald-800 border border-emerald-200",
+  article: "bg-sky-50 text-sky-800 border border-sky-200",
+  personal_writing: "bg-violet-50 text-violet-800 border border-violet-200",
 };
 
 export default function Badge({

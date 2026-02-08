@@ -17,18 +17,17 @@ export default async function SummariesPage() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-slate-900 mb-1">
-        Monthly Summaries
+      <h1 className="text-2xl font-bold text-[#1a1714] mb-1">
+        Monthly summaries
       </h1>
-      <p className="text-slate-500 text-sm mb-6">
+      <p className="text-[#9a9187] text-sm mb-6">
         Auto-generated overviews of your intellectual activity each month.
       </p>
 
-      {/* Months with entries that can be summarized */}
       {availableMonths.length > 0 && (
         <div className="mb-8">
-          <h2 className="text-sm font-medium text-slate-500 mb-3">
-            Generate Summaries
+          <h2 className="text-sm font-medium text-[#9a9187] mb-3">
+            Generate summaries
           </h2>
           <div className="flex gap-2 flex-wrap">
             {availableMonths.map(({ year, month, count }) => {
@@ -50,9 +49,8 @@ export default async function SummariesPage() {
         </div>
       )}
 
-      {/* Existing summaries */}
       {summaries.length === 0 ? (
-        <p className="text-slate-400 text-center py-12">
+        <p className="text-[#c4bbb0] text-center py-12">
           No summaries generated yet. Add some entries, then generate your first summary!
         </p>
       ) : (
@@ -64,20 +62,20 @@ export default async function SummariesPage() {
                 key={summary.id}
                 href={`/summaries/${summary.year}/${summary.month}`}
               >
-                <Card className="hover:shadow-md hover:border-indigo-200 transition-all mb-4">
+                <Card className="hover:shadow-md hover:border-[#c47a2b]/30 transition-all mb-4">
                   <div className="flex items-center justify-between">
                     <div>
-                      <h3 className="font-semibold text-slate-900">
+                      <h3 className="font-semibold text-[#1a1714]">
                         {MONTH_NAMES[summary.month]} {summary.year}
                       </h3>
-                      <p className="text-sm text-slate-500 mt-1">
+                      <p className="text-sm text-[#9a9187] mt-1">
                         {data.entryCount} entries &middot;{" "}
                         {data.topRatedEntries?.[0]
                           ? `Top: "${data.topRatedEntries[0].title}"`
                           : "No entries rated"}
                       </p>
                     </div>
-                    <span className="text-indigo-600 text-sm">View &rarr;</span>
+                    <span className="text-[#c47a2b] text-sm">View &rarr;</span>
                   </div>
                 </Card>
               </Link>

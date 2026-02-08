@@ -19,12 +19,12 @@ export default async function EditEntryPage({ params }: PageProps) {
     <div>
       <Link
         href={`/entries/${id}`}
-        className="text-sm text-indigo-600 hover:text-indigo-700 mb-2 inline-block"
+        className="text-sm text-[#c47a2b] hover:text-[#9a5f1e] mb-2 inline-block"
       >
         &larr; Back to entry
       </Link>
-      <h1 className="text-2xl font-bold text-slate-900 mb-6">Edit Entry</h1>
-      <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
+      <h1 className="text-2xl font-bold text-[#1a1714] mb-6">Edit entry</h1>
+      <div className="bg-white rounded-xl border border-[#e8e0d6] shadow-sm p-6">
         <EntryForm initialData={entry} />
       </div>
     </div>

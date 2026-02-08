@@ -68,13 +68,13 @@ export default function SearchContent() {
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="flex-1 px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none text-lg"
+            className="flex-1 px-4 py-3 border border-[#e8e0d6] rounded-lg focus:ring-2 focus:ring-[#c47a2b]/30 focus:border-[#c47a2b] outline-none text-lg text-[#1a1714] placeholder-[#c4bbb0]"
             placeholder="Search entries, reflections, and tags..."
             autoFocus
           />
           <button
             type="submit"
-            className="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors font-medium"
+            className="px-6 py-3 bg-[#c47a2b] text-white rounded-lg hover:bg-[#9a5f1e] transition-colors font-medium"
           >
             Search
           </button>
@@ -82,17 +82,17 @@ export default function SearchContent() {
       </form>
 
       {isSearching && (
-        <p className="text-slate-500 text-center py-8">Searching...</p>
+        <p className="text-[#9a9187] text-center py-8">Searching...</p>
       )}
 
       {!isSearching && searchParams.get("q") && (
         <div>
-          <p className="text-sm text-slate-500 mb-4">
+          <p className="text-sm text-[#9a9187] mb-4">
             {total} result{total !== 1 ? "s" : ""} for &ldquo;{searchParams.get("q")}&rdquo;
           </p>
 
           {results.length === 0 && (
-            <p className="text-slate-400 text-center py-8">
+            <p className="text-[#c4bbb0] text-center py-8">
               No results found. Try different keywords.
             </p>
           )}
@@ -104,20 +104,20 @@ export default function SearchContent() {
                 <Link
                   key={result.id}
                   href={`/entries/${result.id}`}
-                  className="block bg-white rounded-xl border border-slate-200 p-4 shadow-sm hover:shadow-md hover:border-indigo-200 transition-all"
+                  className="block bg-white rounded-xl border border-[#e8e0d6] p-4 shadow-sm hover:shadow-md hover:border-[#c47a2b]/30 transition-all"
                 >
                   <div className="flex items-center gap-2 mb-1">
                     <Badge variant={result.type.toLowerCase() as "podcast" | "book" | "article" | "personal_writing"}>
                       {typeInfo?.icon} {typeInfo?.label}
                     </Badge>
-                    <span className="text-xs text-slate-400">
+                    <span className="text-xs text-[#9a9187]">
                       Matched in {result.matchSource}
                     </span>
                   </div>
-                  <h3 className="font-semibold text-slate-900">
+                  <h3 className="font-semibold text-[#1a1714]">
                     {result.title}
                   </h3>
-                  <p className="text-sm text-slate-600 mt-1">
+                  <p className="text-sm text-[#6b6157] mt-1">
                     {result.snippet}
                   </p>
                 </Link>
@@ -128,7 +128,7 @@ export default function SearchContent() {
       )}
 
       {!searchParams.get("q") && !isSearching && (
-        <p className="text-slate-400 text-center py-12">
+        <p className="text-[#c4bbb0] text-center py-12">
           Search across all your entries, reflections, and tags.
         </p>
       )}

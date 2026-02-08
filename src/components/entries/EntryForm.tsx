@@ -10,6 +10,9 @@ interface EntryFormProps {
   initialData?: EntryWithTags;
 }
 
+const inputClasses =
+  "w-full px-3 py-2 border border-[#e8e0d6] rounded-lg focus:ring-2 focus:ring-[#c47a2b]/30 focus:border-[#c47a2b] outline-none bg-white text-[#1a1714] placeholder-[#c4bbb0]";
+
 export default function EntryForm({ initialData }: EntryFormProps) {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -17,6 +20,9 @@ export default function EntryForm({ initialData }: EntryFormProps) {
 
   const [title, setTitle] = useState(initialData?.title || "");
   const [type, setType] = useState<string>(initialData?.type || "BOOK");
+  const [inProgress, setInProgress] = useState(
+    initialData ? !initialData.dateConsumed : false
+  );
   const [dateConsumed, setDateConsumed] = useState(
     initialData?.dateConsumed
       ? new Date(initialData.dateConsumed).toISOString().split("T")[0]
@@ -61,7 +67,7 @@ export default function EntryForm({ initialData }: EntryFormProps) {
       const body = {
         title,
         type,
-        dateConsumed,
+        dateConsumed: inProgress ? null : dateConsumed,
         source,
         author,
         content,
@@ -98,36 +104,34 @@ export default function EntryForm({ initialData }: EntryFormProps) {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       {error && (
-        <div className="bg-red-50 text-red-700 px-4 py-3 rounded-lg text-sm">
+        <div className="bg-red-50 text-red-700 px-4 py-3 rounded-lg text-sm border border-red-200">
           {error}
         </div>
       )}
 
-      {/* Title */}
       <div>
-        <label className="block text-sm font-medium text-slate-700 mb-1">
+        <label className="block text-sm font-medium text-[#2d2822] mb-1">
           Title *
         </label>
         <input
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none"
+          className={inputClasses}
           placeholder="What did you consume?"
           required
         />
       </div>
 
-      {/* Type and Date row */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">
+          <label className="block text-sm font-medium text-[#2d2822] mb-1">
             Type *
           </label>
           <select
             value={type}
             onChange={(e) => setType(e.target.value)}
-            className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none bg-white"
+            className={inputClasses}
           >
             {Object.entries(ENTRY_TYPES).map(([key, { label, icon }]) => (
               <option key={key} value={key}>
@@ -138,86 +142,99 @@ export default function EntryForm({ initialData }: EntryFormProps) {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">
-            Date Consumed *
-          </label>
-          <input
-            type="date"
-            value={dateConsumed}
-            onChange={(e) => setDateConsumed(e.target.value)}
-            className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none"
-            required
-          />
+          <div className="flex items-center justify-between mb-1">
+            <label className="block text-sm font-medium text-[#2d2822]">
+              {inProgress ? "Status" : "Date consumed"}
+            </label>
+            <label className="flex items-center gap-1.5 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={inProgress}
+                onChange={(e) => setInProgress(e.target.checked)}
+                className="w-3.5 h-3.5 rounded border-[#e8e0d6] text-[#c47a2b] focus:ring-[#c47a2b]/30"
+              />
+              <span className="text-xs text-[#9a9187]">In progress</span>
+            </label>
+          </div>
+          {inProgress ? (
+            <div className="flex items-center gap-2 px-3 py-2 bg-[#fdf0e0] border border-[#c47a2b]/20 rounded-lg">
+              <span className="text-sm text-[#9a5f1e]">Currently consuming</span>
+            </div>
+          ) : (
+            <input
+              type="date"
+              value={dateConsumed}
+              onChange={(e) => setDateConsumed(e.target.value)}
+              className={inputClasses}
+              required
+            />
+          )}
         </div>
       </div>
 
-      {/* Author and Source row */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">
+          <label className="block text-sm font-medium text-[#2d2822] mb-1">
             Author
           </label>
           <input
             type="text"
             value={author}
             onChange={(e) => setAuthor(e.target.value)}
-            className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none"
+            className={inputClasses}
             placeholder="Who made this?"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">
+          <label className="block text-sm font-medium text-[#2d2822] mb-1">
             Source
           </label>
           <input
             type="text"
             value={source}
             onChange={(e) => setSource(e.target.value)}
-            className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none"
+            className={inputClasses}
             placeholder="Where did you find it?"
           />
         </div>
       </div>
 
-      {/* Content / Notes */}
       <div>
-        <label className="block text-sm font-medium text-slate-700 mb-1">
+        <label className="block text-sm font-medium text-[#2d2822] mb-1">
           Notes
         </label>
         <textarea
           value={content}
           onChange={(e) => setContent(e.target.value)}
           rows={6}
-          className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none resize-y"
+          className={`${inputClasses} resize-y`}
           placeholder="Your thoughts, key ideas, quotes..."
         />
       </div>
 
-      {/* Influence Rating */}
       <div>
-        <label className="block text-sm font-medium text-slate-700 mb-2">
+        <label className="block text-sm font-medium text-[#2d2822] mb-2">
           How much did this influence your thinking?
         </label>
         <StarRating value={influenceRating} onChange={setInfluenceRating} />
       </div>
 
-      {/* Tags */}
       <div>
-        <label className="block text-sm font-medium text-slate-700 mb-1">
+        <label className="block text-sm font-medium text-[#2d2822] mb-1">
           Tags
         </label>
         <div className="flex gap-2 mb-2 flex-wrap">
           {tags.map((tag) => (
             <span
               key={tag}
-              className="inline-flex items-center gap-1 bg-indigo-100 text-indigo-800 px-2.5 py-1 rounded-full text-sm"
+              className="inline-flex items-center gap-1 bg-[#fdf0e0] text-[#9a5f1e] px-2.5 py-1 rounded-full text-sm border border-[#c47a2b]/20"
             >
               {tag}
               <button
                 type="button"
                 onClick={() => removeTag(tag)}
-                className="text-indigo-600 hover:text-indigo-800 font-bold"
+                className="text-[#c47a2b] hover:text-[#9a5f1e] font-bold"
               >
                 x
               </button>
@@ -230,36 +247,35 @@ export default function EntryForm({ initialData }: EntryFormProps) {
             value={tagInput}
             onChange={(e) => setTagInput(e.target.value)}
             onKeyDown={handleKeyDown}
-            className="flex-1 px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none"
+            className={`flex-1 ${inputClasses}`}
             placeholder="Add a tag and press Enter"
           />
           <button
             type="button"
             onClick={addTag}
-            className="px-4 py-2 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 transition-colors"
+            className="px-4 py-2 bg-[#f5efe8] text-[#6b6157] rounded-lg hover:bg-[#e8e0d6] transition-colors"
           >
             Add
           </button>
         </div>
       </div>
 
-      {/* Submit */}
-      <div className="flex gap-3 pt-4">
+      <div className="flex gap-3 pt-4 border-t border-[#e8e0d6]">
         <button
           type="submit"
           disabled={isSubmitting}
-          className="px-6 py-2.5 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors disabled:opacity-50 font-medium"
+          className="px-6 py-2.5 bg-[#c47a2b] text-white rounded-lg hover:bg-[#9a5f1e] transition-colors disabled:opacity-50 font-medium"
         >
           {isSubmitting
             ? "Saving..."
             : initialData
-            ? "Update Entry"
-            : "Save Entry"}
+            ? "Update entry"
+            : "Save entry"}
         </button>
         <button
           type="button"
           onClick={() => router.back()}
-          className="px-6 py-2.5 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 transition-colors"
+          className="px-6 py-2.5 bg-[#f5efe8] text-[#6b6157] rounded-lg hover:bg-[#e8e0d6] transition-colors"
         >
           Cancel
         </button>
