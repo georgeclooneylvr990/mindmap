@@ -1,0 +1,63 @@
+generator client {
+  provider        = "prisma-client"
+  output          = "../src/generated/prisma"
+  previewFeatures = ["fullTextSearchPostgres"]
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum EntryType {
+  PODCAST
+  BOOK
+  PERSONAL_WRITING
+  ARTICLE
+}
+
+model Entry {
+  id              String       @id @default(cuid())
+  title           String
+  type            EntryType
+  dateConsumed    DateTime
+  source          String?
+  author          String?
+  content         String?      @db.Text
+  influenceRating Int          @default(3)
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+
+  reflections     Reflection[]
+  tags            Tag[]        @relation("EntryTags")
+
+  @@index([dateConsumed(sort: Desc)])
+  @@index([influenceRating])
+  @@index([type])
+}
+
+model Reflection {
+  id        String   @id @default(cuid())
+  content   String   @db.Text
+  createdAt DateTime @default(now())
+
+  entry     Entry    @relation(fields: [entryId], references: [id], onDelete: Cascade)
+  entryId   String
+
+  @@index([entryId])
+}
+
+model Tag {
+  id      String  @id @default(cuid())
+  name    String  @unique
+  entries Entry[] @relation("EntryTags")
+}
+
+model MonthlySummary {
+  id          String   @id @default(cuid())
+  year        Int
+  month       Int
+  summary     Json
+  generatedAt DateTime @default(now())
+
+  @@unique([year, month])
+}
